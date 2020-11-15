@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Login from './pages/Login'
+import Logged from './pages/Logged'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    logged: localStorage.getItem('authenticated'),
+  }
+
+  setStateHandler = (value) => {
+    this.setState(value)
+  }
+
+  render() {
+    if (this.state.logged) {
+      return (
+        <Logged setStateHandler={this.setStateHandler} />
+      )
+    }
+    return (
+      <Login setStateHandler={this.setStateHandler} />
+    )
+  }
+
 }
 
 export default App;
